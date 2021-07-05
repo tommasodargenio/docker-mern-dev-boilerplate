@@ -1,0 +1,65 @@
+###################################
+# Title:            Docker Compose configuration
+# Description:      Configuration file for docker-compose to run the development environment - DO NOT USE THIS FOR PRODUCTION!
+# Author:           Tommaso D'Argenio <tom@tommasodargenio.com>
+# URI:              https://github.com/tommasodargenio/docker-mern-dev-boilerplate/docker-compose.yaml
+# Version:          1.0.0 
+###################################
+services:
+  mongodb:
+    image: 'mongo'
+    volumes: 
+      - data:/data/db
+    env_file: 
+      - ./env/mongo.env
+
+  backend:    
+    build: ./backend
+    ports:
+      - "80:80"
+    container_name: backend
+    volumes:
+       # named volume to persist the app logs, note that logs will not be overwritten by local logs folder
+       - logs:/app/logs
+       # bind mount to link the directory on the host with the workdir in the container, this will allow us to update the code on the host while the container is running
+       - ./backend:/app
+       # anonymous volume to ensure node_modules in container persist and it's not overwritten by any local node_modules folder
+       - /app/node_modules
+    env_file: 
+      - ./env/backend.env
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    container_name: frontend
+    stdin_open: true
+    tty: true
+    volumes:
+       - ./frontend/src:/app/src       
+    depends_on:
+      - backend
+  # Utility container to init and install node app, this is used for the backend
+  npm:
+    build:
+      context: .
+      dockerfile: dockerfiles/utility.npm.dockerfile    
+    # enable interactive mode so we can provide input, without this the container will just shut down immediately after starting
+    stdin_open: true
+    tty: true
+    # bind mount to link backend directory on the host machine with the app folder in the container
+    volumes:
+        - ./backend:/app 
+  react:
+    build:
+      context: .
+      dockerfile: dockerfiles/utility.react.dockerfile
+    stdin_open: true
+    tty: true    
+    volumes: 
+      - ./frontend:/app
+volumes:
+  data:
+  logs:
