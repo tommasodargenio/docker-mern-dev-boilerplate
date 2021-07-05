@@ -24,6 +24,7 @@ Alternatively you can just copy your existing projects in the appropriate folder
 ### Requirements
  * [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
  * [Docker Desktop for WSL 2](https://docs.docker.com/docker-for-windows/wsl/)
+ * [Docker Compose >=1.27.1](https://docs.docker.com/compose/install/) *on Docker Desktop for Mac and Windows this is already included, if you are on a Linux based system you will have to install it manually, following the instructions on this page*
  * This repository's [code](https://github.com/tommasodargenio/docker-mern-dev-boilerplate/releases/latest) unzipped in a folder within your home directory on the WSL2 system
    **(Do not use this from the Windows filesystem, all shell commands must run within a WSL2 bash terminal and not Windows terminal or PowerShell)**
 
