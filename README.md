@@ -12,6 +12,8 @@ You can create a node.JS backend app from scratch using the NPM utility containe
 
 Alternatively you can just copy your existing projects in the appropriate folders for backend and frontend. The docker containers will use bind mounts so you can live code your source and verify changes in real-time.
 
+*This template is for development only, **DO NOT USE** in production*
+
 ### Features
  * Boilerplate to rapidly create a MERN stack system without installing any software (but Docker)
  * Create boilerplated apps with the utility containers or use your own
@@ -63,6 +65,8 @@ Support is provided on best-effort basis, please upload screenshots to show the 
 
 ### Disclaimer
 This template and its code is provided *as-is* without warranty of any kind, either express or implied, including any implied warranties or fitness for a particular purpose, merchantibility, or non-infringement.
+
+*This template is for development only, **DO NOT USE** in production*
 
 ### Copyright notice
 Copyright &copy; 2021 by Tommaso D'Argenio
